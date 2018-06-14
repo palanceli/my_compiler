@@ -4,6 +4,7 @@ from semantic_analyzer import SemanticAnalyzer
 from instruction_generator import InstructionGenerator
 from instruction_interpreter import InstructionInterpreter
 
+
 sample_text = """
 var x, y, z : int;
 
@@ -25,73 +26,73 @@ print (3 + 3) * (3 - 3); # 0
 """
 
 def compile_sample_text():
-    print "\nSample text is: \n"
+    print("\nSample text is: \n")
     rule =  "------------------\n"
-    print rule
-    print sample_text
-    print rule
-    print "Lexing ..."
+    print(rule)
+    print(sample_text)
+    print(rule)
+    print("Lexing ...")
     try:
         lexer = Lexer(sample_text)
-        print "Lexing successful!"
+        print("Lexing successful!")
     except:
         raise Exception('Error while lexing :(')
-    print "Creating parser ..."
+    print("Creating parser ...")
     try:
         parser = Parser(lexer)
-        print "Parser creation successful!"
+        print("Parser creation successful!")
     except:
         raise Exception('Error while creating parser :(')
-    print "Parsing ..."
+    print("Parsing ...")
     try:
         tree = parser.parse()
-        print "Parsing successful!"
-        print "Would you like to see the abstract syntax tree as JSON?"
-        answer = raw_input("y/n")
+        print("Parsing successful!")
+        print("Would you like to see the abstract syntax tree as JSON?")
+        answer = input("y/n")
         if answer == "y":
-            print tree.toJSON()
+            print(tree.toJSON())
     except:
         raise Exception('Error while generating abstract syntax tree :(')
-    print "Creating semantic analyzer ..."
+    print("Creating semantic analyzer ...")
     try:
         semantic_analyzer = SemanticAnalyzer()
-        print "Creation of semantic analyzer successful!"
+        print("Creation of semantic analyzer successful!")
     except:
         raise Exception('Error while creating semantic analyzer :(')
-    print "Analyzing semantics ..."
+    print("Analyzing semantics ...")
     try:
         semantic_analyzer.visit(tree)
-        print "Semantic analysis successful!"
+        print("Semantic analysis successful!")
     except:
         raise Exception('Error while analyzing semantics :(')
-    print "Creating instruction generator ..."
+    print("Creating instruction generator ...")
     try:
         instruction_generator = InstructionGenerator()
-        print "Creation of instruction generator successful!"
+        print("Creation of instruction generator successful!")
     except:
         raise Exception('Error while creating instruction generator :(')
-    print "Generating instructions ..."
+    print("Generating instructions ...")
     try:
         instruction_generator.visit(tree)
-        print "Instruction generation successful!"
-        print "Would you like to see the instructions?"
-        answer = raw_input("y/n")
+        print("Instruction generation successful!")
+        print("Would you like to see the instructions?")
+        answer = input("y/n")
         if answer == "y":
             for instruction in instruction_generator.code.instructions[::-1]:
-                print instruction
-            print "numbers: ", instruction_generator.code.number_stack
-            print "names: ", instruction_generator.code.name_stack
+                print(instruction)
+            print("numbers: ", instruction_generator.code.number_stack)
+            print("names: ", instruction_generator.code.name_stack)
     except:
         raise Exception('Error while generating instructions')
-    print "Creating instruction interpreter..."
+    print("Creating instruction interpreter...")
     try:
         instruction_interpreter = InstructionInterpreter()
-        print "Creation of instruction interpreter successful!"
+        print("Creation of instruction interpreter successful!")
     except:
         raise Exception('Error while creating instruciton interpreter')
-    print "Running instruction interpreter ..."
+    print("Running instruction interpreter ...")
     try:
-        print "Output is ..."
+        print("Output is ...")
         instruction_interpreter.run_code(instruction_generator.code)
     except:
         raise Exception('Error while interpreting instructions')
@@ -111,4 +112,4 @@ if __name__ == '__main__':
     #     parser = Parser(lexer)
     #     interpreter = Interpreter(parser)
     #     result = interpreter.interpret()
-    #     print result
+    #     print(result

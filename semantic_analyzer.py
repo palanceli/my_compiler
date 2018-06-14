@@ -22,10 +22,10 @@ class SemanticAnalyzer(NodeVisitor):
         )
         self.current_scope = global_scope
         self.visit(node.block)
-        print "Global scope symbol table created. Would you like to view it?"
-        answer = raw_input('y/n')
+        print("Global scope symbol table created. Would you like to view it?")
+        answer = input('y/n')
         if answer == 'y':
-            print global_scope
+            print(global_scope)
         self.current_scope = self.current_scope.enclosing_scope
         # print 'Leaving global scope...'
 
@@ -50,10 +50,10 @@ class SemanticAnalyzer(NodeVisitor):
             function_symbol.parameters.append(variable_symbol)
 
         self.visit(node.block)
-        print "Function scope %s symbol table created. Would you like to view it?" % function_name
-        answer = raw_input('y/n')
+        print("Function scope %s symbol table created. Would you like to view it?" % function_name)
+        answer = input('y/n')
         if answer == 'y':
-            print function_scope
+            print(function_scope)
         self.current_scope = self.current_scope.enclosing_scope
         # print 'Leaving %s scope' % function_name
 

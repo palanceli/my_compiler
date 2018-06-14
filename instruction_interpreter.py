@@ -39,7 +39,7 @@ class InstructionInterpreter(object):
         self.stack.append(result)
 
     def PRINT(self):
-        print self.stack[-1]
+        print(self.stack[-1])
 
     def parse_argument(self, instruction, argument, code_object):
         """ Understand what the argument to each instruction means."""
