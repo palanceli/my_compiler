@@ -31,18 +31,21 @@ def compile_sample_text():
     print(rule)
     print(sample_text)
     print(rule)
+
     print("Lexing ...")
     try:
         lexer = Lexer(sample_text)
         print("Lexing successful!")
     except:
         raise Exception('Error while lexing :(')
+
     print("Creating parser ...")
     try:
         parser = Parser(lexer)
         print("Parser creation successful!")
     except:
         raise Exception('Error while creating parser :(')
+
     print("Parsing ...")
     try:
         tree = parser.parse()
@@ -53,24 +56,28 @@ def compile_sample_text():
             print(tree.toJSON())
     except:
         raise Exception('Error while generating abstract syntax tree :(')
+
     print("Creating semantic analyzer ...")
     try:
         semantic_analyzer = SemanticAnalyzer()
         print("Creation of semantic analyzer successful!")
     except:
         raise Exception('Error while creating semantic analyzer :(')
+
     print("Analyzing semantics ...")
     try:
         semantic_analyzer.visit(tree)
         print("Semantic analysis successful!")
     except:
         raise Exception('Error while analyzing semantics :(')
+
     print("Creating instruction generator ...")
     try:
         instruction_generator = InstructionGenerator()
         print("Creation of instruction generator successful!")
     except:
         raise Exception('Error while creating instruction generator :(')
+
     print("Generating instructions ...")
     try:
         instruction_generator.visit(tree)
@@ -84,12 +91,14 @@ def compile_sample_text():
             print("names: ", instruction_generator.code.name_stack)
     except:
         raise Exception('Error while generating instructions')
+
     print("Creating instruction interpreter...")
     try:
         instruction_interpreter = InstructionInterpreter()
         print("Creation of instruction interpreter successful!")
     except:
         raise Exception('Error while creating instruciton interpreter')
+        
     print("Running instruction interpreter ...")
     try:
         print("Output is ...")
